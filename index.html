@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ToolStack — Find the right AI tool in seconds</title>
+<meta name="description" content="Curated directory of 55+ AI tools for developers, creators, and builders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --card:#12121a;
+  --border:rgba(255,255,255,.06);
+  --inner:rgba(255,255,255,.05);
+  --accent:#6366f1;
+  --accent-2:#22d3ee;
+  --text:#f0f0f0;
+  --dim:#888;
+  --radius:16px;
+  --head:'Space Grotesk',sans-serif;
+  --body:'Inter',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--body);line-height:1.65;letter-spacing:.01em;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--head);letter-spacing:-.02em;line-height:1.15}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+::selection{background:rgba(99,102,241,.4)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* dot grid */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+/* animated grain */
+.grain{
+  position:fixed;inset:-100%;z-index:1;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grainShift 8s steps(8) infinite;
+  will-change:transform;
+}
+@keyframes grainShift{
+  0%{transform:translate(0,0)}12.5%{transform:translate(-3%,2%)}25%{transform:translate(2%,-4%)}
+  37.5%{transform:translate(-4%,-2%)}50%{transform:translate(3%,3%)}62.5%{transform:translate(-2%,4%)}
+  75%{transform:translate(4%,-3%)}87.5%{transform:translate(-3%,-3%)}100%{transform:translate(0,0)}
+}
+/* custom cursor glow */
+.cursor-glow{
+  position:fixed;width:150px;height:150px;border-radius:50%;
+  background:radial-gradient(circle,rgba(99,102,241,.14),transparent 70%);
+  pointer-events:none;z-index:2;
+  transform:translate(-50%,-50%);
+  will-change:transform;opacity:0;transition:opacity .4s;
+}
+@media(hover:hover) and (pointer:fine){.cursor-glow.on{opacity:1}}
+
+/* section divider */
+.divider{
+  position:relative;height:1px;max-width:640px;margin:0 auto;
+  background:linear-gradient(90deg,transparent,rgba(99,102,241,.45),transparent);
+}
+.divider::after{
+  content:'';position:absolute;left:50%;top:50%;
+  width:6px;height:6px;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:var(--accent-2);
+  box-shadow:0 0 10px var(--accent-2);
+}
+
+/* ============ HERO ============ */
+.hero{
+  min-height:92vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding:110px 0 90px;
+}
+.hero-mesh{
+  position:absolute;inset:-20%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(40% 45% at 25% 30%,rgba(99,102,241,.20),transparent 70%),
+    radial-gradient(35% 40% at 75% 25%,rgba(34,211,238,.10),transparent 70%),
+    radial-gradient(45% 50% at 60% 80%,rgba(99,102,241,.12),transparent 70%);
+  filter:blur(20px);
+  animation:meshDrift 18s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes meshDrift{to{transform:translate(3%,-2%) scale(1.06)}}
+.orbit-field{position:absolute;inset:0;z-index:0;pointer-events:none}
+.orb{
+  position:absolute;border-radius:30%;
+  border:1px solid rgba(99,102,241,.35);
+  background:rgba(99,102,241,.06);
+  backdrop-filter:blur(2px);
+  will-change:transform;opacity:0;
+}
+.orb.cyan{border-color:rgba(34,211,238,.3);background:rgba(34,211,238,.05)}
+.orb.ring{border-radius:50%;background:transparent}
+.hero-inner{text-align:center;max-width:800px;position:relative;z-index:3}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2);
+  border:1px solid rgba(34,211,238,.25);border-radius:100px;
+  padding:6px 16px;margin-bottom:30px;background:rgba(34,211,238,.05);
+}
+.hero-eyebrow::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--accent-2);box-shadow:0 0 8px var(--accent-2);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{
+  font-size:clamp(2.5rem,6vw,4.5rem);font-weight:700;line-height:1.08;
+  margin-bottom:24px;
+}
+.hero h1 .w{
+  display:inline-block;will-change:transform,opacity;
+  background:linear-gradient(120deg,#fff 30%,#a5b4fc 75%,#22d3ee 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{color:var(--dim);font-size:clamp(1rem,2vw,1.2rem);max-width:580px;margin:0 auto 48px}
+.search-shell{position:relative;max-width:620px;margin:0 auto;will-change:transform}
+.search-shell::before{
+  content:'';position:absolute;inset:-2px;border-radius:100px;z-index:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent));
+  background-size:200% 100%;
+  animation:borderFlow 4s linear infinite,breathe 3.2s ease-in-out infinite;
+  filter:blur(7px);
+}
+.search-shell:focus-within::before{animation:borderFlow 4s linear infinite;opacity:1}
+@keyframes borderFlow{to{background-position:200% 0}}
+@keyframes breathe{0%,100%{opacity:.35}50%{opacity:.75}}
+.search-bar{
+  position:relative;z-index:1;display:flex;align-items:center;gap:14px;
+  background:rgba(18,18,26,.9);border:1px solid rgba(99,102,241,.4);
+  border-radius:100px;padding:6px 8px 6px 24px;backdrop-filter:blur(12px);
+}
+.search-bar svg{flex-shrink:0;color:var(--dim)}
+.search-bar input{
+  flex:1;background:none;border:none;outline:none;color:var(--text);
+  font-size:1.05rem;font-family:var(--body);padding:15px 0;min-width:0;
+}
+.search-bar input::placeholder{color:#666}
+.search-kbd{
+  flex-shrink:0;font-size:.75rem;color:var(--dim);
+  border:1px solid var(--border);border-radius:8px;padding:4px 9px;
+  margin-right:10px;background:rgba(255,255,255,.03);font-family:var(--head);
+}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:56px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat b{display:block;font-family:var(--head);font-size:1.6rem}
+.hero-stat span{font-size:.82rem;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.scroll-hint{
+  position:absolute;left:50%;bottom:28px;transform:translateX(-50%);
+  z-index:3;color:var(--dim);display:flex;flex-direction:column;align-items:center;gap:6px;
+  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+}
+.scroll-hint svg{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+
+/* ============ FILTER BAR ============ */
+.filter-bar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(10,10,15,.6);
+  backdrop-filter:blur(4px);
+  border-bottom:1px solid var(--border);
+  padding:14px 0;
+  transition:background .35s,box-shadow .35s,backdrop-filter .35s;
+}
+.filter-bar.stuck{
+  background:rgba(10,10,15,.78);
+  backdrop-filter:blur(18px) saturate(1.4);
+  box-shadow:0 8px 32px rgba(0,0,0,.5);
+}
+.filter-rows{display:flex;flex-direction:column;gap:10px}
+.filter-scroll{
+  display:flex;gap:8px;overflow-x:auto;
+  scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px;
+}
+.filter-scroll::-webkit-scrollbar{display:none}
+.pill{
+  flex-shrink:0;background:rgba(255,255,255,.04);
+  border:1px solid var(--border);color:var(--dim);
+  border-radius:100px;padding:7px 18px;font-size:.86rem;font-weight:500;
+  transition:color .25s,border-color .25s,background .25s,box-shadow .25s,transform .25s;
+  white-space:nowrap;will-change:transform;
+}
+.pill:hover{color:var(--text);border-color:rgba(99,102,241,.5);transform:translateY(-1px)}
+.pill:active{transform:scale(.95)}
+.pill.active{
+  background:rgba(99,102,241,.16);border-color:var(--accent);color:#c7d2fe;
+  box-shadow:0 0 16px rgba(99,102,241,.25);
+}
+.pill.price.active{
+  background:rgba(34,211,238,.12);border-color:var(--accent-2);color:#a5f3fc;
+  box-shadow:0 0 16px rgba(34,211,238,.2);
+}
+.filter-meta{display:flex;align-items:center;gap:14px;font-size:.8rem;color:var(--dim);flex-shrink:0;margin-left:auto}
+.filter-clear{
+  background:none;border:none;color:var(--accent-2);font-size:.8rem;
+  opacity:0;pointer-events:none;transition:opacity .25s;
+}
+.filter-clear.show{opacity:1;pointer-events:auto}
+.filter-clear:hover{text-decoration:underline}
+/* mobile filter drawer */
+.filter-toggle{
+  display:none;align-items:center;gap:8px;
+  background:rgba(99,102,241,.14);border:1px solid var(--accent);
+  color:#c7d2fe;border-radius:100px;padding:8px 20px;
+  font-size:.88rem;font-weight:500;
+}
+.drawer-backdrop{
+  position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.6);
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.drawer-backdrop.open{opacity:1;pointer-events:auto}
+.filter-drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(320px,85vw);z-index:100;
+  background:rgba(14,14,20,.95);backdrop-filter:blur(20px);
+  border-left:1px solid var(--border);
+  padding:24px;overflow-y:auto;
+  transform:translateX(105%);transition:transform .38s cubic-bezier(.22,1,.36,1);
+  will-change:transform;
+}
+.filter-drawer.open{transform:translateX(0)}
+.filter-drawer h4{margin:20px 0 12px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-2)}
+.drawer-pills{display:flex;flex-wrap:wrap;gap:8px}
+.drawer-close{
+  background:none;border:1px solid var(--border);color:var(--dim);
+  width:34px;height:34px;border-radius:10px;font-size:1rem;float:right;
+  transition:all .2s;
+}
+.drawer-close:hover{color:var(--text);border-color:var(--accent)}
+@media(max-width:760px){
+  .filter-scroll.desktop-only,.filter-meta .count-inline{display:none}
+  .filter-toggle{display:inline-flex}
+  .filter-rows{flex-direction:row;align-items:center;justify-content:space-between}
+}
+
+/* ============ GRID ============ */
+.grid-section{padding:120px 0 60px}
+.section-head{margin-bottom:44px}
+.section-head h2{font-size:clamp(1.7rem,3.4vw,2.3rem);margin-bottom:10px;will-change:transform}
+.section-head p{color:var(--dim);will-change:transform}
+.tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;perspective:1200px}
+@media(max-width:920px){.tool-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.tool-grid{grid-template-columns:1fr}}
+.tool-card{
+  position:relative;
+  background:rgba(18,18,26,.62);
+  border:1px solid var(--border);
+  box-shadow:inset 0 0 0 1px var(--inner),0 4px 18px rgba(0,0,0,.28);
+  border-radius:var(--radius);
+  padding:26px;
+  backdrop-filter:blur(16px);
+  transition:box-shadow .35s,border-color .35s,opacity .3s;
+  display:flex;flex-direction:column;gap:12px;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  will-change:transform,opacity;
+}
+.tool-card::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),rgba(99,102,241,.14),transparent 60%);
+  opacity:0;transition:opacity .35s;
+}
+.tool-card:hover,.tool-card.tapped{
+  border-color:rgba(99,102,241,.5);
+  box-shadow:inset 0 0 0 1px var(--inner),0 20px 48px rgba(0,0,0,.6),0 0 0 1px rgba(99,102,241,.15),0 0 36px rgba(99,102,241,.14);
+}
+.tool-card:hover::before,.tool-card.tapped::before{opacity:1}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.tool-logo{
+  width:44px;height:44px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--head);font-weight:700;font-size:1.05rem;
+  background:linear-gradient(135deg,rgba(99,102,241,.25),rgba(34,211,238,.12));
+  border:1px solid rgba(99,102,241,.3);color:#c7d2fe;
+}
+.price-badge{
+  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 11px;border-radius:100px;flex-shrink:0;
+}
+.price-badge.free{background:rgba(34,211,238,.12);color:#67e8f9;border:1px solid rgba(34,211,238,.3)}
+.price-badge.freemium{background:rgba(99,102,241,.14);color:#a5b4fc;border:1px solid rgba(99,102,241,.35)}
+.price-badge.paid{background:rgba(244,114,182,.1);color:#f9a8d4;border:1px solid rgba(244,114,182,.28)}
+.tool-card h3{font-size:1.2rem;font-weight:600}
+.tool-desc{color:var(--dim);font-size:.92rem}
+.tool-expand{
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .45s cubic-bezier(.22,1,.36,1),opacity .35s,margin .35s;
+  font-size:.86rem;color:#aaa;
+}
+.tool-card:hover .tool-expand,.tool-card.tapped .tool-expand,.tool-card:focus-within .tool-expand{
+  max-height:170px;opacity:1;margin-top:2px;
+}
+.visit-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--accent-2);font-weight:500;font-size:.88rem;margin-top:10px;
+  transition:gap .25s;
+}
+.visit-link:hover{gap:11px;text-shadow:0 0 12px rgba(34,211,238,.6)}
+.card-tags{display:flex;flex-wrap:wrap;gap:6px}
+.card-tag{
+  font-size:.72rem;color:var(--dim);border:1px solid var(--border);
+  background:rgba(255,255,255,.03);border-radius:100px;padding:3px 11px;
+}
+.card-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:auto;padding-top:14px;border-top:1px solid var(--border);
+}
+.stack-score{display:flex;align-items:center;gap:7px;font-size:.85rem}
+.stars{display:flex;gap:2px}
+.stars svg{width:13px;height:13px}
+.score-num{font-family:var(--head);font-weight:600;color:var(--text)}
+.compare-btn{
+  background:none;border:1px solid var(--border);color:var(--dim);
+  border-radius:8px;padding:5px 13px;font-size:.78rem;font-weight:500;
+  transition:all .25s;
+}
+.compare-btn:hover{border-color:var(--accent);color:#c7d2fe;box-shadow:0 0 12px rgba(99,102,241,.25)}
+.compare-btn:active{transform:scale(.94)}
+.compare-btn.in-compare{background:rgba(99,102,241,.18);border-color:var(--accent);color:#c7d2fe}
+.empty-state{grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--dim);display:none}
+.empty-state.show{display:block}
+.empty-state b{display:block;font-family:var(--head);font-size:1.3rem;color:var(--text);margin-bottom:8px}
+@media(max-width:600px){.tool-card{padding:22px}}
+
+/* ============ COMPARE ============ */
+.compare-section{padding:120px 0}
+.compare-head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:36px}
+.clear-compare{
+  background:none;border:1px solid var(--border);color:var(--dim);
+  border-radius:100px;padding:8px 20px;font-size:.85rem;
+  opacity:0;pointer-events:none;transition:all .3s;
+}
+.clear-compare.show{opacity:1;pointer-events:auto}
+.clear-compare:hover{color:#fca5a5;border-color:rgba(252,165,165,.4)}
+.compare-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px}
+@media(max-width:700px){.compare-slots{grid-template-columns:1fr}}
+.compare-slot{
+  border:1.5px dashed rgba(99,102,241,.3);border-radius:var(--radius);
+  min-height:124px;display:flex;align-items:center;justify-content:center;
+  color:var(--dim);font-size:.9rem;position:relative;
+  transition:border-color .3s,background .3s;
+}
+.compare-slot.drag-over{border-color:var(--accent-2);background:rgba(34,211,238,.05)}
+.compare-slot.filled{
+  border-style:solid;border-color:rgba(99,102,241,.5);
+  background:rgba(18,18,26,.8);backdrop-filter:blur(16px);
+}
+.slot-card{width:100%;height:100%;padding:20px;display:flex;flex-direction:column;gap:6px;will-change:transform}
+.slot-card h4{font-size:1.05rem}
+.slot-card span{font-size:.8rem;color:var(--dim)}
+.slot-remove{
+  position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  color:var(--dim);font-size:.85rem;line-height:1;transition:all .2s;
+}
+.slot-remove:hover{color:#fca5a5;border-color:rgba(252,165,165,.4);transform:rotate(90deg)}
+.compare-table-wrap{
+  overflow:hidden;max-height:0;opacity:0;
+  transition:max-height .6s cubic-bezier(.22,1,.36,1),opacity .5s;
+}
+.compare-table-wrap.show{max-height:900px;opacity:1}
+.table-scroll{overflow-x:auto;border-radius:var(--radius)}
+.compare-table{
+  width:100%;border-collapse:collapse;
+  background:rgba(18,18,26,.62);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  backdrop-filter:blur(16px);font-size:.9rem;min-width:560px;
+}
+.compare-table th,.compare-table td{padding:15px 18px;text-align:left;border-bottom:1px solid var(--border)}
+.compare-table th{
+  font-family:var(--head);color:var(--accent-2);font-weight:600;
+  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  background:rgba(255,255,255,.02);
+}
+.compare-table td:first-child{color:var(--dim);font-weight:500;width:160px}
+.compare-table tr{will-change:transform,opacity}
+.compare-table tr:last-child td{border-bottom:none}
+.yes{color:#6ee7b7}.no{color:#fca5a5}
+
+/* ============ NEWSLETTER ============ */
+.newsletter{padding:120px 0}
+.newsletter-box{
+  position:relative;background:rgba(18,18,26,.62);
+  border:1px solid var(--border);
+  box-shadow:inset 0 0 0 1px var(--inner);
+  border-radius:24px;padding:clamp(44px,6vw,76px);
+  text-align:center;overflow:hidden;backdrop-filter:blur(16px);
+}
+.newsletter-box::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(50% 80% at 50% 0%,rgba(99,102,241,.15),transparent 70%);
+}
+.newsletter h2{font-size:clamp(1.7rem,3.5vw,2.4rem);margin-bottom:12px;position:relative}
+.newsletter p{color:var(--dim);margin-bottom:34px;position:relative}
+.news-form{display:flex;gap:10px;max-width:460px;margin:0 auto;position:relative;flex-wrap:wrap;justify-content:center}
+.news-form input{
+  flex:1;min-width:220px;background:rgba(10,10,15,.7);
+  border:1px solid var(--border);border-radius:12px;padding:14px 18px;
+  color:var(--text);font-size:.95rem;font-family:var(--body);
+  outline:none;transition:border-color .3s,box-shadow .3s;
+}
+.news-form input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.subscribe-btn{
+  background:linear-gradient(120deg,var(--accent),#8b5cf6);
+  border:none;border-radius:12px;color:#fff;font-weight:600;font-size:.95rem;
+  padding:14px 28px;transition:transform .25s;
+  animation:btnGlow 3s ease-in-out infinite;will-change:transform;
+}
+@keyframes btnGlow{0%,100%{box-shadow:0 0 18px rgba(99,102,241,.35)}50%{box-shadow:0 0 34px rgba(99,102,241,.6)}}
+.subscribe-btn:hover{transform:translateY(-2px)}
+.subscribe-btn:active{transform:scale(.96)}
+.news-note{font-size:.78rem;color:#555;margin-top:16px;position:relative}
+.news-success{display:none;color:#6ee7b7;font-weight:500;margin-top:16px;position:relative}
+.news-success.show{display:block;animation:popIn .4s ease}
+@keyframes popIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--border);padding:56px 0 44px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.footer-brand{font-family:var(--head);font-weight:700;font-size:1.1rem}
+.footer-brand span{color:var(--accent-2)}
+.footer-by{color:var(--dim);font-size:.88rem}
+.footer-by a{color:var(--text);transition:color .25s}
+.footer-by a:hover{color:var(--accent-2)}
+.footer-links{display:flex;gap:10px;align-items:center}
+.social-btn{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--border);color:var(--dim);
+  transition:all .25s;will-change:transform;
+}
+.social-btn:hover{
+  color:var(--text);border-color:var(--accent);
+  transform:translateY(-3px);box-shadow:0 6px 16px rgba(99,102,241,.25);
+}
+.submit-tool{
+  font-size:.85rem;color:var(--dim);border:1px solid var(--border);
+  border-radius:100px;padding:8px 18px;transition:all .25s;
+}
+.submit-tool:hover{color:#c7d2fe;border-color:var(--accent);box-shadow:0 0 14px rgba(99,102,241,.2)}
+
+/* back to top */
+.back-top{
+  position:fixed;right:24px;bottom:24px;z-index:60;
+  width:46px;height:46px;border-radius:14px;
+  background:rgba(18,18,26,.85);backdrop-filter:blur(12px);
+  border:1px solid rgba(99,102,241,.4);color:#c7d2fe;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transform:translateY(14px);
+  transition:opacity .35s,transform .35s,box-shadow .25s;
+  will-change:transform;
+}
+.back-top.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.back-top:hover{box-shadow:0 0 20px rgba(99,102,241,.4)}
+
+@media(max-width:600px){
+  .hero{min-height:82vh;padding:90px 0 70px}
+  .search-kbd{display:none}
+  .hero-stats{gap:30px}
+  .footer-inner{flex-direction:column;text-align:center}
+  .grid-section,.compare-section,.newsletter{padding:90px 0 50px}
+  .compare-section{padding:90px 0}
+  .newsletter{padding:90px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-mesh"></div>
+  <div class="orbit-field" id="orbitField"></div>
+  <div class="wrap hero-inner">
+    <div class="hero-eyebrow" data-intro>Curated weekly · 55+ tools</div>
+    <h1 id="heroTitle">Find the right AI tool in seconds</h1>
+    <p data-intro>Curated directory of 55+ AI tools for developers, creators, and builders. No fluff — just the stack that ships.</p>
+    <div class="search-shell" id="searchShell">
+      <div class="search-bar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="searchInput" placeholder="Search tools, categories, use-cases..." autocomplete="off">
+        <span class="search-kbd">/</span>
+      </div>
+    </div>
+    <div class="hero-stats" data-intro>
+      <div class="hero-stat"><b id="statTools">0</b><span>Tools indexed</span></div>
+      <div class="hero-stat"><b>13</b><span>Categories</span></div>
+      <div class="hero-stat"><b>100%</b><span>Hand-curated</span></div>
+    </div>
+  </div>
+  <div class="scroll-hint" id="scrollHint">
+    Scroll
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</header>
+
+<!-- ============ FILTER BAR ============ -->
+<nav class="filter-bar" id="filterBar">
+  <div class="wrap filter-rows">
+    <div class="filter-scroll desktop-only" id="categoryFilters"></div>
+    <button class="filter-toggle" id="drawerOpen">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 3H2l8 9.46V19l4 2v-8.54z"/></svg>
+      Filters
+    </button>
+    <div class="filter-scroll" style="align-items:center">
+      <div class="desktop-only filter-scroll" id="priceFilters" style="display:flex;gap:8px;overflow:visible"></div>
+      <div class="filter-meta">
+        <span id="resultCount"></span>
+        <button class="filter-clear" id="clearFilters">Clear all ×</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- mobile drawer -->
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="filter-drawer" id="filterDrawer">
+  <button class="drawer-close" id="drawerClose">×</button>
+  <h4>Categories</h4>
+  <div class="drawer-pills" id="drawerCats"></div>
+  <h4>Pricing</h4>
+  <div class="drawer-pills" id="drawerPrices"></div>
+</aside>
+
+<!-- ============ TOOL GRID ============ -->
+<main class="grid-section wrap" id="tools">
+  <div class="section-head" data-section>
+    <h2 data-parallax-head>The Stack</h2>
+    <p data-parallax-sub>Every tool vetted, scored, and categorized. Hover a card for details.</p>
+  </div>
+  <div class="tool-grid" id="toolGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <b>Nothing matches that filter</b>
+    Try a different search term or clear your filters.
+  </div>
+</main>
+
+<div class="divider"></div>
+
+<!-- ============ COMPARE ============ -->
+<section class="compare-section wrap" id="compare">
+  <div class="compare-head-row" data-section>
+    <div class="section-head" style="margin:0">
+      <h2 data-parallax-head>Compare Tools</h2>
+      <p data-parallax-sub>Hit "+ Compare" on any card — or drag one here — to line up 3 tools side by side.</p>
+    </div>
+    <button class="clear-compare" id="clearCompare">Clear comparison</button>
+  </div>
+  <div class="compare-slots" id="compareSlots" data-section>
+    <div class="compare-slot" data-slot="0">Slot 1 — add a tool</div>
+    <div class="compare-slot" data-slot="1">Slot 2 — add a tool</div>
+    <div class="compare-slot" data-slot="2">Slot 3 — add a tool</div>
+  </div>
+  <div class="compare-table-wrap" id="compareTableWrap">
+    <div class="table-scroll">
+      <table class="compare-table" id="compareTable"></table>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ NEWSLETTER ============ -->
+<section class="newsletter wrap">
+  <div class="newsletter-box" data-section>
+    <h2>Get weekly tool drops</h2>
+    <p>One email a week. The 3–5 tools worth knowing about. That's it.</p>
+    <form class="news-form" id="newsForm">
+      <input type="email" id="newsEmail" placeholder="you@builder.dev" required>
+      <button type="submit" class="subscribe-btn">Subscribe</button>
+    </form>
+    <div class="news-note">No spam. Unsubscribe anytime.</div>
+    <div class="news-success" id="newsSuccess">✓ You're in. First drop lands Friday.</div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-brand">Tool<span>Stack</span></div>
+      <div class="footer-by">Built by <a href="https://github.com/youssef-880" target="_blank" rel="noopener">Youssef</a></div>
+    </div>
+    <a class="submit-tool" href="mailto:youssefxxclex@gmail.com?subject=Submit%20a%20tool%20to%20ToolStack">Submit a tool →</a>
+    <div class="footer-links">
+      <a class="social-btn" href="https://github.com/youssef-880" target="_blank" rel="noopener" aria-label="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .31.21.68.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+      </a>
+      <a class="social-btn" href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.18h4.56V23H.22V8.18zM8.34 8.18h4.37v2.02h.06c.61-1.15 2.1-2.37 4.32-2.37 4.62 0 5.47 3.04 5.47 6.99V23h-4.56v-7.21c0-1.72-.03-3.93-2.4-3.93-2.4 0-2.77 1.87-2.77 3.8V23H8.34V8.18z"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script>
+/* ============================================================
+   TOOL DATA — edit this array to add/remove tools.
+   pricing: "Free" | "Freemium" | "Paid"
+   curve: "Easy" | "Medium" | "Hard"   community: "Small" | "Medium" | "Large"
+============================================================ */
+const T=(name,cats,pricing,score,url,desc,long,os,api,freeTier,best,curve,community)=>({name,cats,pricing,score,url,desc,long,os,api,freeTier,best,curve,community});
+const TOOLS=[
+/* --- LLMs / Chat --- */
+T("ChatGPT",["LLMs"],"Freemium",4.7,"https://chatgpt.com",
+  "The default LLM for most of the world — with the largest plugin & GPT ecosystem.",
+  "If you only pick one general assistant, this is the safe choice: strong at everything, nothing missing. The custom GPT store, memory, and voice mode make it the most complete consumer package, though power users often pair it with a specialist.",
+  false,true,true,"General-purpose assistant","Easy","Large"),
+T("Claude",["LLMs"],"Freemium",4.9,"https://claude.ai",
+  "Best-in-class reasoning and writing, with 200K context and Artifacts for live output.",
+  "Pick Claude when nuance matters: long documents, careful analysis, code review, or writing that shouldn't sound like AI. Projects and Artifacts turn it into a workspace rather than a chatbot. Weaker only in image generation, which it doesn't do.",
+  false,true,true,"Reasoning & long documents","Easy","Large"),
+T("Gemini",["LLMs"],"Freemium",4.4,"https://gemini.google.com",
+  "Million-token context and native multimodality, wired into the whole Google stack.",
+  "Choose Gemini if you live in Google Workspace or need to throw entire codebases and hour-long videos at a model. AI Studio's free API tier is the most generous in the industry, which makes it the default for prototyping.",
+  false,true,true,"Huge context & multimodal","Easy","Large"),
+T("Mistral",["LLMs"],"Freemium",4.3,"https://mistral.ai",
+  "European open-weight models that punch above their size — self-host or use the API.",
+  "The pragmatic pick when you need open weights with a commercial-friendly story or EU data residency. Le Chat is a capable free assistant, and models like Mistral Small run comfortably on a single GPU.",
+  true,true,true,"Open-weight efficiency","Medium","Medium"),
+T("Llama 3",["LLMs"],"Free",4.2,"https://llama.com",
+  "Meta's open-weight family — the backbone of the entire local-AI ecosystem.",
+  "If you want to run, fine-tune, or ship a model without per-token bills, Llama is the ecosystem standard: every tool, quantization format, and tutorial supports it first. You handle the infrastructure; in exchange, you own the stack.",
+  true,false,true,"Local & self-hosted AI","Hard","Large"),
+T("Grok",["LLMs"],"Freemium",4.0,"https://grok.com",
+  "xAI's model with real-time X data and the loosest guardrails of the majors.",
+  "Worth it mainly for real-time social/news awareness and an unusually candid tone. The API is competitively priced. Skip it if you need a mature ecosystem of integrations — it's the youngest of the major players.",
+  false,true,true,"Real-time info & candor","Easy","Medium"),
+T("Perplexity",["LLMs"],"Freemium",4.4,"https://perplexity.ai",
+  "An answer engine, not a chatbot — every claim comes with a citation.",
+  "Use it when you'd otherwise Google: research, fact-finding, comparisons. It searches live, synthesizes, and shows sources, which makes hallucinations easy to catch. Not the tool for creative writing or long coding sessions.",
+  false,true,true,"Research with citations","Easy","Large"),
+T("Cohere Command",["LLMs"],"Paid",4.0,"https://cohere.com",
+  "Enterprise-focused models built for RAG, tool use, and multilingual retrieval.",
+  "The B2B specialist: Command models are tuned for grounded RAG answers, and Cohere's embed + rerank models are among the best for search pipelines. Choose it for production retrieval systems, not for a daily chat assistant.",
+  false,true,true,"Enterprise RAG & search","Medium","Small"),
+T("DeepSeek",["LLMs"],"Freemium",4.3,"https://deepseek.com",
+  "Frontier-level open-weight reasoning at a fraction of the usual API price.",
+  "The value king: R1-class reasoning with open weights and API prices an order of magnitude below Western rivals. Great for cost-sensitive backends and self-hosting. Consider data-residency implications before using the hosted API for sensitive work.",
+  true,true,true,"Cheap frontier reasoning","Medium","Large"),
+/* --- Code Assistants --- */
+T("GitHub Copilot",["Code Assistants"],"Freemium",4.4,"https://github.com/features/copilot",
+  "The safest enterprise pick — completions, chat, and agents inside GitHub itself.",
+  "Best when your team already lives on GitHub: PR summaries, workspace-wide chat, and agent mode integrate where the code lives. Multi-model support (Claude, GPT, Gemini) means you're not locked to one brain. Free tier now exists for light use.",
+  false,false,true,"In-editor + GitHub workflow","Easy","Large"),
+T("Cursor",["Code Assistants"],"Freemium",4.7,"https://cursor.com",
+  "The AI-first editor — codebase-aware chat and multi-file agentic edits in a VS Code fork.",
+  "The default for AI-native developers. Tab completions that predict your next edit (not just next token) and Composer for multi-file changes are genuinely ahead of stock VS Code + extensions. Your VS Code settings and extensions carry over.",
+  false,false,true,"AI-native editing","Easy","Large"),
+T("Claude Code",["Code Assistants"],"Paid",4.9,"https://claude.com/claude-code",
+  "A terminal agent that reads, edits, tests, and commits across your whole repo.",
+  "Choose it for real engineering tasks, not autocomplete: refactors across dozens of files, debugging from a stack trace, writing and running tests. Terminal-first and scriptable, so it slots into any editor or CI workflow. Requires a paid Claude plan or API key.",
+  false,true,false,"Agentic repo-wide coding","Medium","Large"),
+T("Windsurf",["Code Assistants"],"Freemium",4.4,"https://windsurf.com",
+  "Agentic IDE with Cascade — flows that keep deep context across an entire task.",
+  "Cursor's main rival, from the Codeium team. Cascade's automatic context tracking feels more hands-off than Cursor: you describe the goal, it plans and executes. Slightly friendlier free tier makes it a great first agentic IDE.",
+  false,false,true,"Hands-off agentic flows","Easy","Medium"),
+T("Tabnine",["Code Assistants"],"Freemium",3.9,"https://tabnine.com",
+  "Privacy-first completions — can run fully air-gapped on your own infrastructure.",
+  "The pick for regulated industries: on-prem/VPC deployment, models never trained on GPL code, and full IP indemnification. The trade-off is raw capability — it trails Cursor and Copilot on complex generation.",
+  false,false,true,"Private/on-prem completion","Easy","Medium"),
+T("Codeium",["Code Assistants"],"Freemium",4.1,"https://codeium.com",
+  "The best genuinely-free autocomplete, supporting 70+ editors.",
+  "If you want capable AI completions at zero cost — including in niche editors like Vim, Emacs, or Jupyter — this is it. The free individual tier is unlimited. Teams that outgrow it usually graduate to Windsurf, its sibling IDE.",
+  false,false,true,"Free autocomplete anywhere","Easy","Large"),
+T("Bolt",["Code Assistants","Design / No-Code"],"Freemium",4.2,"https://bolt.new",
+  "Prompt-to-full-stack-app in the browser — it runs, installs, and deploys in WebContainers.",
+  "The fastest idea-to-deployed-app loop available: describe an app, watch it scaffold, run, and ship — entirely in-browser. Great for prototypes and MVPs; you'll want a real editor once the codebase grows past a weekend project.",
+  false,false,true,"Instant full-stack prototypes","Easy","Medium"),
+T("Lovable",["Code Assistants","Design / No-Code"],"Freemium",4.2,"https://lovable.dev",
+  "Chat your way to a production web app — with Supabase and GitHub built in.",
+  "Aimed at founders more than developers: it produces polished React apps with auth and a database wired up, and syncs to GitHub so engineers can take over later. The best 'non-technical cofounder builds v1' tool right now.",
+  false,false,true,"Founder-friendly app building","Easy","Medium"),
+/* --- Image Generation --- */
+T("Midjourney",["Image Gen"],"Paid",4.6,"https://midjourney.com",
+  "Still the aesthetic king — unmatched for stylized, art-directed imagery.",
+  "When the output needs to look designed rather than generated, Midjourney wins. The web editor, style references, and personalization have matured far beyond the Discord days. No free tier and no official API — it's a creative tool, not an infrastructure piece.",
+  false,false,false,"Stylized art & concepts","Easy","Large"),
+T("DALL·E 3",["Image Gen"],"Freemium",4.1,"https://openai.com/dall-e-3",
+  "The best prompt-follower for complex scenes, built right into ChatGPT.",
+  "Choose it for convenience and prompt adherence: it renders exactly the weird, specific scene you described, without prompt engineering. Aesthetics trail Midjourney and Flux. If you're already in ChatGPT, it's zero extra friction.",
+  false,true,true,"Prompt adherence, convenience","Easy","Large"),
+T("Stable Diffusion",["Image Gen"],"Free",4.3,"https://stability.ai",
+  "The open-source ecosystem — LoRAs, ControlNet, ComfyUI, total control.",
+  "The choice when you need control the hosted tools can't give: exact poses via ControlNet, custom-trained styles via LoRA, batch pipelines via ComfyUI, all running on your own GPU. Steepest learning curve, deepest ceiling.",
+  true,true,true,"Local control & fine-tuning","Hard","Large"),
+T("Flux",["Image Gen"],"Freemium",4.5,"https://blackforestlabs.ai",
+  "Photorealism and legible text rendering from the original Stable Diffusion team.",
+  "The current open-model quality leader: hands, faces, and in-image text that consistently work. Open [dev] weights for self-hosting plus Pro tiers on every major inference API. The best default for realistic product/marketing imagery.",
+  true,true,true,"Photorealism & typography","Medium","Large"),
+T("Ideogram",["Image Gen"],"Freemium",4.2,"https://ideogram.ai",
+  "The specialist for text inside images — logos, posters, and typography that's actually spelled right.",
+  "If your image needs words — a poster, a logo mock, a greeting card — Ideogram beats everyone at rendering clean, correct text. General imagery is solid but not Midjourney-level; use it as a specialist, not a daily driver.",
+  false,true,true,"Text-in-image & logos","Easy","Medium"),
+T("Leonardo AI",["Image Gen"],"Freemium",4.1,"https://leonardo.ai",
+  "Game-asset and production pipeline focus — consistent characters, custom models, an actual API.",
+  "Built for people who generate at volume: train custom models on your style, keep characters consistent across shots, and automate via API. Popular with game studios and marketing teams; the daily free token allowance is generous.",
+  false,true,true,"Game assets & pipelines","Medium","Medium"),
+T("Adobe Firefly",["Image Gen"],"Freemium",4.0,"https://adobe.com/products/firefly",
+  "Commercially-safe generation, trained only on licensed content, inside Creative Cloud.",
+  "The corporate-legal-approved option: trained exclusively on Adobe Stock and licensed content, with IP indemnification for enterprises. Generative Fill in Photoshop is its killer app. Raw quality trails the leaders, but the safety story is unique.",
+  false,true,true,"Commercially-safe imagery","Easy","Large"),
+/* --- Video / Audio --- */
+T("Runway",["Video / Audio"],"Freemium",4.4,"https://runwayml.com",
+  "The professional's AI video suite — Gen-4, motion brush, and real editing tools.",
+  "The most production-ready video platform: camera controls, keyframing, and an editor that filmmakers actually use (it contributed to 'Everything Everywhere All at Once'). Credits burn fast — budget for a paid tier if you're serious.",
+  false,true,true,"Professional AI video","Medium","Large"),
+T("Pika",["Video / Audio"],"Freemium",4.0,"https://pika.art",
+  "Playful, effects-driven video gen — Pikaffects made it the social-video favorite.",
+  "The fun one: inflate, melt, explode effects and quick image-to-video make it ideal for social content and memes. Less about cinematic control than Runway, more about speed and shareability.",
+  false,false,true,"Social & effects video","Easy","Medium"),
+T("Kling",["Video / Audio"],"Freemium",4.3,"https://klingai.com",
+  "Kuaishou's video model — arguably the best motion physics available to consumers.",
+  "Generates longer clips (up to 2 min) with remarkably coherent physics and human motion. The free daily credits are generous. Interface and billing feel less polished than Western rivals, but raw output quality competes with anyone.",
+  false,true,true,"Realistic motion & length","Easy","Large"),
+T("ElevenLabs",["Video / Audio"],"Freemium",4.7,"https://elevenlabs.io",
+  "The industry standard for AI voice — cloning, dubbing, and a production-grade API.",
+  "If you need speech that doesn't sound synthetic, this is the benchmark. Voice cloning from minutes of audio, 30+ language dubbing, and low-latency streaming for agents. The API is the default choice for any product with a voice.",
+  false,true,true,"Voice synthesis & cloning","Easy","Large"),
+T("Suno",["Video / Audio"],"Freemium",4.3,"https://suno.com",
+  "Full songs — vocals, lyrics, production — from a text prompt in under a minute.",
+  "The accessible one: type a vibe, get a surprisingly listenable complete song. v4 output is good enough for content backgrounds and demos. Commercial use requires a paid plan; check the licensing terms before shipping.",
+  false,false,true,"Complete song generation","Easy","Large"),
+T("Udio",["Video / Audio"],"Freemium",4.1,"https://udio.com",
+  "The audiophile's music generator — finer control and often higher fidelity than Suno.",
+  "Preferred by users with production ears: better instrument separation, inpainting to regenerate specific sections, and manual mode for granular control. Slightly steeper learning curve than Suno's one-shot magic.",
+  false,false,true,"High-fidelity music control","Medium","Medium"),
+T("HeyGen",["Video / Audio"],"Freemium",4.2,"https://heygen.com",
+  "Talking-head avatar videos and instant video translation with lip-sync.",
+  "The business tool of the category: turn a script into a presenter video, clone yourself for scalable content, or translate an existing video into 40 languages with matched lip movement. Priced for teams, with a limited free trial.",
+  false,true,true,"Avatar & translated video","Easy","Medium"),
+/* --- Automation / Orchestration --- */
+T("n8n",["Automation","Orchestration"],"Freemium",4.6,"https://n8n.io",
+  "Fair-code workflow automation you can self-host — with first-class AI agent nodes.",
+  "The developer's automation pick: node-based flows, real code steps when you need them, and self-hosting that makes per-task pricing irrelevant. Its LangChain-powered AI nodes make it the fastest way to put an LLM agent into a business process.",
+  true,true,true,"Self-hosted AI workflows","Medium","Large"),
+T("Zapier",["Automation"],"Freemium",4.2,"https://zapier.com",
+  "8,000+ app integrations — the biggest catalog, zero hosting, zero code.",
+  "Choose Zapier when the integration existing matters more than the price: whatever obscure SaaS you use, there's a connector. Costs climb steeply with volume, and complex branching logic gets awkward — that's where Make and n8n take over.",
+  false,true,true,"No-code SaaS glue","Easy","Large"),
+T("Make",["Automation"],"Freemium",4.3,"https://make.com",
+  "Visual scenario builder with real branching, iteration, and error handling — cheaper than Zapier.",
+  "The middle ground: far more powerful logic than Zapier (routers, iterators, aggregators on a visual canvas) at roughly half the price, without the self-hosting overhead of n8n. The canvas genuinely helps you reason about complex flows.",
+  false,true,true,"Complex visual scenarios","Medium","Large"),
+T("Activepieces",["Automation"],"Freemium",4.1,"https://activepieces.com",
+  "Open-source (MIT) Zapier alternative — embed automation inside your own product.",
+  "Two reasons to pick it: a genuinely open MIT license for self-hosting, and an embedding SDK that lets you white-label automation inside your SaaS. Piece catalog is smaller than the giants but growing fast, and pieces are just TypeScript.",
+  true,true,true,"Embeddable open automation","Medium","Small"),
+T("Windmill",["Automation","Orchestration"],"Freemium",4.3,"https://windmill.dev",
+  "Turn scripts (Python/TS/Go/Bash) into workflows, UIs, and cron jobs — a developer platform, not a no-code toy.",
+  "For engineers who find node-based builders limiting: write real code, get auto-generated UIs, scheduling, retries, and approval steps for free. Self-hostable and dramatically faster than Airflow for internal tooling.",
+  true,true,true,"Code-first internal tools","Medium","Small"),
+/* --- Databases --- */
+T("Supabase",["Databases","Auth / Backend"],"Freemium",4.8,"https://supabase.com",
+  "Postgres + auth + storage + realtime + vectors in one open-source box.",
+  "The default backend of the AI era: real Postgres (not a proprietary store), row-level security, pgvector built in, and edge functions. The free tier runs real projects. Choose it unless you specifically need Firebase's mobile SDK maturity.",
+  true,true,true,"Full Postgres backend","Easy","Large"),
+T("Firebase",["Databases","Auth / Backend"],"Freemium",4.3,"https://firebase.google.com",
+  "Google's battle-tested app platform — still the king of mobile-first realtime.",
+  "Pick Firebase for mobile apps: offline sync, push notifications, crash reporting, and auth SDKs that have survived a decade of production. The NoSQL model (Firestore) fights you on relational data — that's when Supabase wins.",
+  false,true,true,"Mobile-first apps","Easy","Large"),
+T("PocketBase",["Databases","Auth / Backend"],"Free",4.5,"https://pocketbase.io",
+  "A complete backend — SQLite, auth, files, admin UI — in one ~15MB Go binary.",
+  "The minimalist's dream: download one file, run it, and you have a backend with an admin dashboard. Perfect for prototypes, internal tools, and apps that will never need horizontal scaling. Extend it with Go or JS hooks.",
+  true,true,true,"Tiny self-hosted backends","Easy","Medium"),
+T("Neon",["Databases"],"Freemium",4.5,"https://neon.tech",
+  "Serverless Postgres with database branching — a DB copy per pull request.",
+  "Choose Neon for the branching workflow: every PR gets an instant, copy-on-write database branch, and scale-to-zero means dev databases cost nothing while idle. It's just Postgres, so there's no lock-in beyond the conveniences.",
+  false,true,true,"Branching dev workflows","Easy","Medium"),
+T("PlanetScale",["Databases"],"Paid",4.2,"https://planetscale.com",
+  "Vitess-powered MySQL that scales to YouTube size, with schema-change workflows.",
+  "The choice for serious MySQL at scale: non-blocking schema migrations via deploy requests, sharding via Vitess, and now Postgres support too. The free tier is gone — this is a production tool priced for production budgets.",
+  false,true,false,"MySQL at massive scale","Medium","Medium"),
+T("Turso",["Databases"],"Freemium",4.2,"https://turso.tech",
+  "SQLite at the edge — hundreds of tiny databases, one per user if you want.",
+  "Rethinks the database as something you can have thousands of: per-user or per-tenant DBs with microsecond reads, replicated to the edge. Ideal for local-first apps and multi-tenant SaaS. The generous free tier includes 500 databases.",
+  true,true,true,"Edge & per-tenant SQLite","Medium","Small"),
+/* --- Vector DBs --- */
+T("Pinecone",["Vector DBs"],"Freemium",4.4,"https://pinecone.io",
+  "Fully-managed serverless vector search — zero ops, predictable at scale.",
+  "The 'nobody got fired for buying it' vector DB: serverless pricing, solid SLAs, and no infrastructure to babysit. Costs more than self-hosting at high volume, but for most teams the ops time saved pays for itself.",
+  false,true,true,"Managed production RAG","Easy","Large"),
+T("Weaviate",["Vector DBs"],"Freemium",4.3,"https://weaviate.io",
+  "Open-source vector DB with native hybrid (vector + keyword) search.",
+  "Choose it when pure vector similarity isn't enough: BM25 + vector hybrid search out of the box, built-in vectorizer modules, and GraphQL queries. Self-host it or use their serverless cloud.",
+  true,true,true,"Hybrid search","Medium","Medium"),
+T("ChromaDB",["Vector DBs"],"Free",4.2,"https://trychroma.com",
+  "pip install chromadb — vector search running in your Python process in 30 seconds.",
+  "The prototyping default: embedded mode means no server to run, and the API is four functions. Perfect for local RAG experiments and small apps. For heavy production loads, teams typically graduate to Qdrant or Pinecone.",
+  true,true,true,"Prototyping RAG locally","Easy","Large"),
+T("Qdrant",["Vector DBs"],"Freemium",4.5,"https://qdrant.tech",
+  "Rust-built vector engine — the performance/filtering leader among open options.",
+  "The self-hoster's production choice: consistently top benchmark results, sophisticated payload filtering, and efficient quantization for keeping RAM costs sane at scale. A free 1GB cloud cluster makes trying it frictionless.",
+  true,true,true,"High-performance filtering","Medium","Medium"),
+T("Milvus",["Vector DBs"],"Freemium",4.1,"https://milvus.io",
+  "The billion-scale vector database, built for distributed deployments.",
+  "When your vectors number in the billions, Milvus's distributed architecture (separate compute/storage, multiple index types, GPU support) is built for it. Overkill for small projects — Milvus Lite and Zilliz Cloud lower the entry bar.",
+  true,true,true,"Billion-scale search","Hard","Medium"),
+/* --- Hosting / Deploy --- */
+T("Vercel",["Hosting"],"Freemium",4.7,"https://vercel.com",
+  "The frontend cloud — git push, get a preview URL, ship. Home of Next.js.",
+  "The smoothest DX in hosting: preview deployments per PR, edge functions, and the AI SDK make it the default for Next.js and AI-app frontends. Watch bandwidth pricing at scale, and remember it's not built for long-running backends.",
+  false,true,true,"Next.js & frontend apps","Easy","Large"),
+T("Railway",["Hosting"],"Freemium",4.5,"https://railway.com",
+  "Deploy anything — backends, databases, cron — from a repo with zero config.",
+  "The backend counterpart to Vercel: point it at a Dockerfile or repo and it just runs, with Postgres/Redis one click away. Usage-based pricing is transparent. The best 'I just want my server running' experience available.",
+  false,true,true,"Backends & databases","Easy","Medium"),
+T("Netlify",["Hosting"],"Freemium",4.3,"https://netlify.com",
+  "The original Jamstack platform — still the smoothest static + forms + functions combo.",
+  "Rock-solid for static sites and SPAs: instant rollbacks, split testing, form handling without a backend. It pioneered the deploy-preview workflow. For heavy server-rendered apps, Vercel's framework integration is a step ahead.",
+  false,true,true,"Static sites & Jamstack","Easy","Large"),
+T("Render",["Hosting"],"Freemium",4.2,"https://render.com",
+  "Heroku's spiritual successor — web services, workers, and managed Postgres, sanely priced.",
+  "The balanced pick for full-stack apps: native support for background workers and cron jobs (which Vercel lacks), predictable instance pricing, and a free tier for experiments. Cold starts on free services are the main gotcha.",
+  false,true,true,"Full-stack Heroku refugee","Easy","Medium"),
+T("Fly.io",["Hosting"],"Paid",4.3,"https://fly.io",
+  "Run containers close to users in 35 regions — real VMs, real control.",
+  "For when latency and control matter: Firecracker microVMs deployed globally, scale-to-zero machines, and GPU instances for inference. More ops knowledge required than Railway/Render, but you can build genuinely distributed systems.",
+  false,true,false,"Global low-latency apps","Hard","Medium"),
+T("Cloudflare Pages",["Hosting"],"Freemium",4.4,"https://pages.cloudflare.com",
+  "Free unlimited-bandwidth static hosting on the world's largest edge network.",
+  "The economics are unbeatable: unlimited bandwidth free, plus Workers, D1 (SQLite), R2 (S3 without egress fees), and KV for full-stack apps. The Workers runtime isn't Node — check compatibility before porting an existing backend.",
+  false,true,true,"Edge-first, free bandwidth","Medium","Large"),
+/* --- Scraping / Data --- */
+T("Apify",["Scraping"],"Freemium",4.4,"https://apify.com",
+  "A marketplace of 4,000+ ready-made scrapers plus infra to run your own.",
+  "Check the Actor store before writing any scraper — someone's probably built it (TikTok, Google Maps, Amazon...). When you do write your own, their platform handles proxies, scheduling, and storage. Pay-per-use pricing suits spiky workloads.",
+  false,true,true,"Turnkey scrapers at scale","Easy","Medium"),
+T("Bright Data",["Scraping"],"Paid",4.2,"https://brightdata.com",
+  "The largest proxy network on earth, plus unblocker APIs for hostile targets.",
+  "The heavy artillery: 100M+ residential IPs and a Web Unlocker that defeats most anti-bot systems. Priced for businesses, not hobbyists. When a site blocks everything else, this is what still gets through — use it ethically and legally.",
+  false,true,false,"Enterprise data collection","Medium","Medium"),
+T("Crawlee",["Scraping","Frameworks / DevTools"],"Free",4.3,"https://crawlee.dev",
+  "The best open-source scraping library — Playwright/Puppeteer with anti-blocking built in.",
+  "From the Apify team, free forever: automatic proxy rotation, browser fingerprinting, request queuing, and graceful retries in Node or Python. If you're writing scrapers by hand, start here instead of raw Playwright.",
+  true,false,true,"DIY scraping done right","Medium","Medium"),
+T("Firecrawl",["Scraping","Frameworks / DevTools"],"Freemium",4.4,"https://firecrawl.dev",
+  "One API call turns any website into clean, LLM-ready markdown.",
+  "Purpose-built for the RAG era: crawl a whole site or scrape a page and get back markdown or structured JSON, with JS rendering handled. The 'extract with a schema' endpoint replaces a lot of custom parsing code. Open source if you want to self-host.",
+  true,true,true,"Web data for LLMs","Easy","Medium"),
+/* --- Frameworks / DevTools --- */
+T("LangChain",["Frameworks / DevTools","Orchestration"],"Free",4.1,"https://langchain.com",
+  "The biggest LLM framework — every integration imaginable, plus LangGraph for agents.",
+  "Its superpower is the integration catalog: any model, vector store, or tool has a connector. LangGraph (agent state machines) and LangSmith (observability) are the strongest parts. Critics call the core abstractions heavy — many teams use just the pieces they need.",
+  true,true,true,"LLM app orchestration","Medium","Large"),
+T("LlamaIndex",["Frameworks / DevTools"],"Free",4.3,"https://llamaindex.ai",
+  "The RAG specialist — ingestion, indexing, and retrieval done properly.",
+  "Choose it when the problem is 'connect an LLM to my data': its parsing (LlamaParse handles brutal PDFs), chunking, and retrieval strategies outclass DIY pipelines. More focused and less sprawling than LangChain.",
+  true,true,true,"RAG & data pipelines","Medium","Large"),
+T("CrewAI",["Frameworks / DevTools","Orchestration"],"Free",4.2,"https://crewai.com",
+  "Role-based multi-agent teams — the most approachable way to orchestrate agents.",
+  "Define agents with roles, goals, and tools; compose them into crews with tasks. The mental model is intuitive enough to build a working multi-agent system in an afternoon. Independent of LangChain, lean, and increasingly enterprise-focused.",
+  true,true,true,"Multi-agent teams fast","Easy","Large"),
+T("AutoGen",["Frameworks / DevTools"],"Free",4.0,"https://microsoft.github.io/autogen",
+  "Microsoft Research's multi-agent conversation framework — powerful, research-grade.",
+  "The academic heavyweight: agents that converse, execute code, and involve humans in the loop. The v0.4 rewrite (actor model, async) made it production-plausible. Steeper curve than CrewAI; stronger for complex, code-executing agent systems.",
+  true,true,true,"Research-grade agents","Hard","Medium"),
+T("Semantic Kernel",["Frameworks / DevTools"],"Free",3.9,"https://learn.microsoft.com/semantic-kernel",
+  "Microsoft's enterprise agent SDK — first-class C# and .NET support.",
+  "The only serious option if your stack is .NET: plugins, planners, and agents with enterprise patterns (DI, telemetry) baked in. Python support exists but the C# experience is the point. Ideal for Azure-committed organizations.",
+  true,true,true,".NET AI applications","Medium","Medium"),
+T("Haystack",["Frameworks / DevTools"],"Free",4.1,"https://haystack.deepset.ai",
+  "Production-grade pipeline framework for search and RAG, from deepset.",
+  "The engineering-first choice: explicit, typed pipelines that are easy to test, serialize, and deploy — no magic. Strong for semantic search and document QA in production. Less trendy than LangChain, often more maintainable.",
+  true,true,true,"Production RAG pipelines","Medium","Medium"),
+/* --- Design / No-Code --- */
+T("v0",["Design / No-Code","Code Assistants"],"Freemium",4.4,"https://v0.app",
+  "Vercel's UI generator — prompt to production-grade React + shadcn/ui components.",
+  "The fastest way from idea to real UI code: output uses shadcn/ui and Tailwind, so it drops straight into a modern Next.js codebase instead of generating throwaway markup. Now handles full-stack generation and deploys to Vercel in one click.",
+  false,true,true,"Prompt-to-React UI","Easy","Large"),
+T("Framer",["Design / No-Code"],"Freemium",4.3,"https://framer.com",
+  "Design-tool-quality sites that ship — with AI generation and real CMS built in.",
+  "The designer's site builder: canvas feels like Figma, output is a fast production site with animations that would take days to hand-code. Ideal for marketing sites and portfolios. It's a closed platform — you can't export clean code.",
+  false,false,true,"Designer-built sites","Easy","Large"),
+T("Webflow",["Design / No-Code"],"Freemium",4.2,"https://webflow.com",
+  "Visual development with production-grade CSS control and a serious CMS.",
+  "The professional's no-code tool: real box-model control, complex CMS relationships, and enterprise hosting. Steeper learning curve than Framer — it's closer to visual programming than drawing. The standard for agency-built marketing sites.",
+  false,true,true,"Agency-grade sites & CMS","Hard","Large"),
+T("Figma AI",["Design / No-Code"],"Freemium",4.1,"https://figma.com",
+  "AI inside the design standard — First Draft mockups, Figma Make prototypes, instant renaming.",
+  "If your team designs, it designs in Figma, and the AI features meet you there: generate first-draft mockups, turn designs into working prototypes with Make, and automate the tedium (renaming layers, finding assets). Evolution, not revolution.",
+  false,true,true,"AI in the design workflow","Easy","Large"),
+T("Relume",["Design / No-Code"],"Freemium",4.0,"https://relume.io",
+  "AI sitemaps and wireframes that export straight to Figma and Webflow.",
+  "The agency accelerator: describe a business, get a full sitemap and wireframes built from its 1,000+ component library, then push to Webflow or Figma. Turns the first week of a website project into an afternoon.",
+  false,false,true,"Sitemap-to-wireframe speed","Easy","Medium"),
+/* --- Auth / Backend --- */
+T("Clerk",["Auth / Backend"],"Freemium",4.5,"https://clerk.com",
+  "Drop-in auth with beautiful prebuilt React components — orgs and billing included.",
+  "The fastest path to production auth in React/Next.js: <SignIn/> and you're done, with MFA, organizations, and now Stripe-integrated billing handled. 10K free monthly active users. The trade-off of any managed auth: your users live in their system.",
+  false,true,true,"React/Next.js auth","Easy","Large"),
+T("Auth0",["Auth / Backend"],"Freemium",4.1,"https://auth0.com",
+  "The enterprise identity veteran — every protocol, every compliance box checked.",
+  "Choose Auth0 when requirements say SAML, complex B2B federation, or a compliance audit: two decades of edge cases are baked in. The free tier now covers 25K MAUs. Pricing at enterprise scale is famously steep — budget accordingly.",
+  false,true,true,"Enterprise SSO & federation","Medium","Large"),
+T("Kinde",["Auth / Backend"],"Freemium",4.2,"https://kinde.com",
+  "Auth plus feature flags and billing — the startup's whole commercial layer.",
+  "The scrappy alternative: authentication, feature flags, and subscription billing in one dashboard, so a SaaS can launch without stitching four vendors together. Younger ecosystem than Clerk/Auth0, but the bundle is genuinely convenient.",
+  false,true,true,"Startup auth + billing","Easy","Small"),
+T("Convex",["Auth / Backend","Databases"],"Freemium",4.4,"https://convex.dev",
+  "The reactive backend — TypeScript functions and a database where every query is a live subscription.",
+  "A different paradigm: write TypeScript queries and mutations, and every component using them updates in real time automatically — no cache invalidation, no websocket plumbing. Exceptional for collaborative and AI-streaming apps. Now open source.",
+  true,true,true,"Realtime TypeScript apps","Medium","Medium"),
+];
+
+const CATEGORIES=["All","LLMs","Code Assistants","Image Gen","Video / Audio","Automation","Orchestration","Databases","Vector DBs","Hosting","Scraping","Frameworks / DevTools","Design / No-Code","Auth / Backend"];
+const PRICES=["Free","Freemium","Paid"];
+
+/* ============ STATE ============ */
+let activeCat="All";
+let activePrices=new Set();
+let searchQuery="";
+let compareSel=[null,null,null];
+
+/* ============ DOM ============ */
+const $=id=>document.getElementById(id);
+const grid=$("toolGrid"),catWrap=$("categoryFilters"),priceWrap=$("priceFilters"),
+      drawerCats=$("drawerCats"),drawerPrices=$("drawerPrices"),
+      resultCount=$("resultCount"),clearBtn=$("clearFilters"),
+      emptyState=$("emptyState"),searchInput=$("searchInput");
+
+/* ============ FILTER PILLS (desktop + drawer share state) ============ */
+function makeCatPill(cat){
+  const b=document.createElement("button");
+  b.className="pill"+(cat===activeCat?" active":"");
+  b.textContent=cat;b.dataset.cat=cat;
+  b.onclick=()=>{activeCat=cat;syncPills();applyFilters();};
+  return b;
+}
+function makePricePill(pr){
+  const b=document.createElement("button");
+  b.className="pill price";b.textContent=pr;b.dataset.price=pr;
+  b.onclick=()=>{activePrices.has(pr)?activePrices.delete(pr):activePrices.add(pr);syncPills();applyFilters();};
+  return b;
+}
+CATEGORIES.forEach(c=>{catWrap.appendChild(makeCatPill(c));drawerCats.appendChild(makeCatPill(c));});
+PRICES.forEach(p=>{priceWrap.appendChild(makePricePill(p));drawerPrices.appendChild(makePricePill(p));});
+function syncPills(){
+  document.querySelectorAll(".pill[data-cat]").forEach(p=>p.classList.toggle("active",p.dataset.cat===activeCat));
+  document.querySelectorAll(".pill[data-price]").forEach(p=>p.classList.toggle("active",activePrices.has(p.dataset.price)));
+}
+clearBtn.onclick=()=>{
+  activeCat="All";activePrices.clear();searchQuery="";searchInput.value="";
+  syncPills();applyFilters();
+};
+
+/* mobile drawer */
+const drawer=$("filterDrawer"),backdrop=$("drawerBackdrop");
+$("drawerOpen").onclick=()=>{drawer.classList.add("open");backdrop.classList.add("open");};
+const closeDrawer=()=>{drawer.classList.remove("open");backdrop.classList.remove("open");};
+$("drawerClose").onclick=closeDrawer;
+backdrop.onclick=closeDrawer;
+
+/* ============ CARDS ============ */
+const isTouch=window.matchMedia("(hover:none)").matches;
+function starSVG(fill){
+  return `<svg viewBox="0 0 24 24" fill="${fill?'#22d3ee':'none'}" stroke="${fill?'#22d3ee':'#444'}" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>`;
+}
+function renderCards(){
+  const frag=document.createDocumentFragment();
+  TOOLS.forEach((t,i)=>{
+    const card=document.createElement("article");
+    card.className="tool-card";
+    card.dataset.index=i;
+    card.draggable=!isTouch;
+    const stars=Array.from({length:5},(_,s)=>starSVG(s<Math.round(t.score))).join("");
+    card.innerHTML=`
+      <div class="card-top">
+        <div class="tool-logo">${t.name.slice(0,2).toUpperCase()}</div>
+        <span class="price-badge ${t.pricing.toLowerCase()}">${t.pricing}</span>
+      </div>
+      <h3>${t.name}</h3>
+      <p class="tool-desc">${t.desc}</p>
+      <div class="tool-expand">${t.long}<br><a class="visit-link" href="${t.url}" target="_blank" rel="noopener">Visit Site <span>→</span></a></div>
+      <div class="card-tags">${t.cats.map(c=>`<span class="card-tag">${c}</span>`).join("")}</div>
+      <div class="card-bottom">
+        <div class="stack-score"><span class="stars">${stars}</span><span class="score-num">${t.score.toFixed(1)}</span></div>
+        <button class="compare-btn" data-compare="${i}">+ Compare</button>
+      </div>`;
+    /* 3D tilt + spotlight */
+    if(!isTouch){
+      card.addEventListener("mousemove",e=>{
+        const r=card.getBoundingClientRect();
+        const x=e.clientX-r.left,y=e.clientY-r.top;
+        card.style.setProperty("--mx",x+"px");
+        card.style.setProperty("--my",y+"px");
+        const rx=((y/r.height)-.5)*-6,ry=((x/r.width)-.5)*6;
+        gsap.to(card,{rotateX:rx,rotateY:ry,y:-6,duration:.4,ease:"power2.out",overwrite:"auto"});
+      });
+      card.addEventListener("mouseleave",()=>{
+        gsap.to(card,{rotateX:0,rotateY:0,y:0,duration:.6,ease:"power3.out",overwrite:"auto"});
+      });
+      card.addEventListener("dragstart",e=>e.dataTransfer.setData("text/plain",i));
+    }else{
+      /* tap-friendly: first tap expands, links work on expanded card */
+      card.addEventListener("click",e=>{
+        if(e.target.closest("a,button"))return;
+        document.querySelectorAll(".tool-card.tapped").forEach(c=>{if(c!==card)c.classList.remove("tapped");});
+        card.classList.toggle("tapped");
+      });
+    }
+    card.querySelector(".compare-btn").onclick=()=>toggleCompare(i);
+    frag.appendChild(card);
+  });
+  grid.appendChild(frag);
+}
+
+/* ============ FILTERING with FLIP ============ */
+function matches(t){
+  const catOK=activeCat==="All"||t.cats.includes(activeCat);
+  const priceOK=activePrices.size===0||activePrices.has(t.pricing);
+  const q=searchQuery.trim().toLowerCase();
+  const searchOK=!q||[t.name,t.desc,t.long,t.best,...t.cats].join(" ").toLowerCase().includes(q);
+  return catOK&&priceOK&&searchOK;
+}
+function applyFilters(){
+  const cards=[...grid.children];
+  /* FIRST: record positions of currently visible cards */
+  const first=new Map();
+  cards.forEach(c=>{if(c.style.display!=="none")first.set(c,c.getBoundingClientRect());});
+  const leaving=[],entering=[],staying=[];
+  let visible=0;
+  cards.forEach(card=>{
+    const show=matches(TOOLS[+card.dataset.index]);
+    const wasShown=card.style.display!=="none";
+    if(show){visible++;wasShown?staying.push(card):entering.push(card);}
+    else if(wasShown)leaving.push(card);
+  });
+  /* animate leavers out, then reflow */
+  leaving.forEach(c=>{
+    gsap.to(c,{scale:.85,opacity:0,duration:.22,ease:"power2.in",overwrite:true,
+      onComplete(){c.style.display="none";gsap.set(c,{clearProps:"scale,opacity"});}});
+  });
+  entering.forEach(c=>{c.style.display="";gsap.set(c,{opacity:0,scale:.9});});
+  /* LAST + INVERT + PLAY on next frame (after display changes) */
+  requestAnimationFrame(()=>{
+    staying.forEach(c=>{
+      const f=first.get(c),l=c.getBoundingClientRect();
+      const dx=f.left-l.left,dy=f.top-l.top;
+      if(dx||dy){
+        gsap.fromTo(c,{x:dx,y:dy},{x:0,y:0,duration:.5,ease:"power3.out",overwrite:"auto",clearProps:"x,y"});
+      }
+    });
+    entering.forEach((c,i)=>{
+      gsap.to(c,{opacity:1,scale:1,duration:.4,delay:.12+i*.03,ease:"power3.out",overwrite:true,clearProps:"opacity,scale"});
+    });
+  });
+  resultCount.textContent=`${visible} tool${visible===1?"":"s"}`;
+  emptyState.classList.toggle("show",visible===0);
+  const filtered=activeCat!=="All"||activePrices.size>0||searchQuery.trim();
+  clearBtn.classList.toggle("show",!!filtered);
+}
+/* debounced search */
+let searchT;
+searchInput.addEventListener("input",e=>{
+  clearTimeout(searchT);
+  searchT=setTimeout(()=>{searchQuery=e.target.value;applyFilters();},180);
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="/"&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){
+    e.preventDefault();searchInput.focus();
+    searchInput.scrollIntoView({behavior:"smooth",block:"center"});
+  }
+});
+
+/* ============ COMPARE ============ */
+const slotEls=[...document.querySelectorAll(".compare-slot")];
+const tableWrap=$("compareTableWrap"),table=$("compareTable"),clearCompareBtn=$("clearCompare");
+
+function toggleCompare(i){
+  const at=compareSel.indexOf(i);
+  if(at>-1)compareSel[at]=null;
+  else{
+    const free=compareSel.indexOf(null);
+    if(free===-1){flashSlots();return;}
+    compareSel[free]=i;
+    $("compare").scrollIntoView({behavior:"smooth",block:"nearest"});
+  }
+  renderCompare(at===-1);
+}
+function flashSlots(){
+  slotEls.forEach(s=>{s.style.borderColor="var(--accent-2)";setTimeout(()=>s.style.borderColor="",500);});
+}
+clearCompareBtn.onclick=()=>{compareSel=[null,null,null];renderCompare(false);};
+
+function renderCompare(animateNew){
+  slotEls.forEach((slot,s)=>{
+    const idx=compareSel[s];
+    if(idx===null){
+      slot.className="compare-slot";
+      slot.innerHTML=`Slot ${s+1} — add a tool`;
+    }else{
+      const t=TOOLS[idx];
+      const wasFilled=slot.classList.contains("filled")&&slot.dataset.tool==String(idx);
+      slot.className="compare-slot filled";
+      slot.dataset.tool=idx;
+      slot.innerHTML=`
+        <div class="slot-card">
+          <h4>${t.name}</h4>
+          <span>${t.cats.join(" · ")} · ${t.pricing}</span>
+        </div>
+        <button class="slot-remove" aria-label="Remove ${t.name}">×</button>`;
+      slot.querySelector(".slot-remove").onclick=()=>{compareSel[s]=null;renderCompare(false);};
+      if(!wasFilled&&animateNew){
+        gsap.from(slot.querySelector(".slot-card"),{y:26,opacity:0,scale:.9,duration:.7,ease:"elastic.out(1,.6)"});
+      }
+    }
+  });
+  document.querySelectorAll(".compare-btn").forEach(b=>{
+    const inC=compareSel.includes(+b.dataset.compare);
+    b.classList.toggle("in-compare",inC);
+    b.textContent=inC?"✓ Added":"+ Compare";
+  });
+  const picked=compareSel.filter(x=>x!==null).map(i=>TOOLS[i]);
+  clearCompareBtn.classList.toggle("show",picked.length>0);
+  if(picked.length>=2){
+    const row=(label,fn)=>`<tr><td>${label}</td>${picked.map(fn).map(v=>`<td>${v}</td>`).join("")}</tr>`;
+    const yn=v=>v?'<span class="yes">✓ Yes</span>':'<span class="no">✗ No</span>';
+    table.innerHTML=`
+      <tr><th>Feature</th>${picked.map(t=>`<th>${t.name}</th>`).join("")}</tr>
+      ${row("Pricing model",t=>`<span class="price-badge ${t.pricing.toLowerCase()}">${t.pricing}</span>`)}
+      ${row("Free tier",t=>yn(t.freeTier))}
+      ${row("Open source",t=>yn(t.os))}
+      ${row("API available",t=>yn(t.api))}
+      ${row("Best use case",t=>t.best)}
+      ${row("Learning curve",t=>t.curve)}
+      ${row("Community size",t=>t.community)}
+      ${row("Stack score",t=>`<b class="score-num">${t.score.toFixed(1)} / 5</b>`)}`;
+    const wasShown=tableWrap.classList.contains("show");
+    tableWrap.classList.add("show");
+    gsap.from(table.querySelectorAll("tr"),{
+      opacity:0,x:-18,duration:.45,stagger:.06,ease:"power2.out",
+      delay:wasShown?0:.25,clearProps:"opacity,transform"});
+  }else{
+    tableWrap.classList.remove("show");
+  }
+}
+/* drag & drop into slots */
+slotEls.forEach((slot,s)=>{
+  slot.addEventListener("dragover",e=>{e.preventDefault();slot.classList.add("drag-over");});
+  slot.addEventListener("dragleave",()=>slot.classList.remove("drag-over"));
+  slot.addEventListener("drop",e=>{
+    e.preventDefault();slot.classList.remove("drag-over");
+    const i=+e.dataTransfer.getData("text/plain");
+    if(!Number.isInteger(i)||compareSel.includes(i))return;
+    compareSel[s]=i;renderCompare(true);
+  });
+});
+
+/* ============ NEWSLETTER ============ */
+$("newsForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  $("newsSuccess").classList.add("show");
+  e.target.reset();
+  setTimeout(()=>$("newsSuccess").classList.remove("show"),5000);
+});
+
+/* ============ CURSOR GLOW (desktop only) ============ */
+const glow=$("cursorGlow");
+if(!isTouch){
+  const qx=gsap.quickTo(glow,"x",{duration:.35,ease:"power3.out"});
+  const qy=gsap.quickTo(glow,"y",{duration:.35,ease:"power3.out"});
+  window.addEventListener("mousemove",e=>{
+    glow.classList.add("on");qx(e.clientX);qy(e.clientY);
+  },{passive:true});
+}
+
+/* ============ ORBITING SHAPES ============ */
+const field=$("orbitField");
+const shapes=[
+  {size:52,x:"12%",y:"22%",cls:"",dur:14,depth:.35},
+  {size:34,x:"82%",y:"18%",cls:"cyan",dur:11,depth:.6},
+  {size:70,x:"78%",y:"68%",cls:"ring",dur:18,depth:.25},
+  {size:28,x:"18%",y:"72%",cls:"cyan ring",dur:9,depth:.7},
+  {size:44,x:"90%",y:"42%",cls:"",dur:16,depth:.45},
+  {size:22,x:"6%",y:"48%",cls:"cyan",dur:12,depth:.85},
+];
+const orbEls=shapes.map(s=>{
+  const el=document.createElement("div");
+  el.className="orb "+s.cls;
+  el.style.cssText=`width:${s.size}px;height:${s.size}px;left:${s.x};top:${s.y}`;
+  field.appendChild(el);
+  return el;
+});
+
+/* ============ GSAP ============ */
+gsap.registerPlugin(ScrollTrigger);
+
+/* --- orchestrated page-load entrance (~2.5s) --- */
+const heroTitle=$("heroTitle");
+heroTitle.innerHTML=heroTitle.textContent.trim().split(" ")
+  .map(w=>`<span class="w">${w}</span>`).join(" ");
+gsap.set("[data-intro]",{opacity:0,y:24});
+gsap.set("#searchShell",{opacity:0,scale:.9});
+gsap.set("#heroTitle .w",{opacity:0,y:30,rotateX:-40});
+
+const intro=gsap.timeline({defaults:{ease:"power3.out"}});
+intro
+  .to("#heroTitle .w",{opacity:1,y:0,rotateX:0,duration:.7,stagger:.09},.25)
+  .to("[data-intro]",{opacity:1,y:0,duration:.8,stagger:.15},"-=.35")
+  .to(orbEls,{opacity:1,scale:1,duration:.9,stagger:.08,ease:"back.out(1.6)",
+    onStart(){gsap.from(orbEls,{x:()=>gsap.utils.random(-160,160),y:()=>gsap.utils.random(-120,120),stagger:.08,duration:.9,ease:"power3.out"});}},"-=.6")
+  .to("#searchShell",{opacity:1,scale:1,duration:.7,ease:"back.out(1.4)"},"-=.5");
+
+/* ambient float on orbs (after entrance) */
+shapes.forEach((s,i)=>{
+  gsap.to(orbEls[i],{y:"random(-40,40)",x:"random(-30,30)",rotation:"random(-90,90)",
+    duration:s.dur,repeat:-1,yoyo:true,ease:"sine.inOut",delay:2});
+});
+/* parallax depth on scroll */
+shapes.forEach((s,i)=>{
+  gsap.to(orbEls[i],{yPercent:-160*s.depth,ease:"none",
+    scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:.6}});
+});
+/* scroll hint fade */
+gsap.to("#scrollHint",{opacity:0,ease:"none",
+  scrollTrigger:{trigger:".hero",start:"top top",end:"25% top",scrub:true}});
+
+/* counter */
+gsap.to({n:0},{n:TOOLS.length,duration:1.6,delay:1,ease:"power2.out",
+  onUpdate:function(){$("statTools").textContent=Math.round(this.targets()[0].n)+"+";}});
+
+/* section reveals: fade + slide up */
+document.querySelectorAll("[data-section]").forEach(el=>{
+  gsap.from(el,{opacity:0,y:44,duration:.9,ease:"power3.out",
+    scrollTrigger:{trigger:el,start:"top 86%"}});
+});
+/* heading/content parallax (different scroll speeds) */
+document.querySelectorAll("[data-parallax-head]").forEach(el=>{
+  gsap.to(el,{yPercent:-18,ease:"none",
+    scrollTrigger:{trigger:el.closest("section,main"),start:"top bottom",end:"bottom top",scrub:.8}});
+});
+document.querySelectorAll("[data-parallax-sub]").forEach(el=>{
+  gsap.to(el,{yPercent:-6,ease:"none",
+    scrollTrigger:{trigger:el.closest("section,main"),start:"top bottom",end:"bottom top",scrub:1.2}});
+});
+/* divider glow-in */
+document.querySelectorAll(".divider").forEach(d=>{
+  gsap.from(d,{scaleX:0,opacity:0,duration:1,ease:"power3.out",
+    scrollTrigger:{trigger:d,start:"top 92%"}});
+});
+
+/* --- cards: lazy staggered reveal, cascading left-to-right per row --- */
+renderCards();
+applyFilters();
+renderCompare(false);
+(function lazyRevealCards(){
+  const cards=[...grid.children];
+  const cols=getComputedStyle(grid).gridTemplateColumns.split(" ").length;
+  gsap.set(cards,{opacity:0,y:44});
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting)return;
+      io.unobserve(e.target);
+      const i=cards.indexOf(e.target);
+      const col=i%cols;
+      gsap.to(e.target,{opacity:1,y:0,duration:.65,delay:col*.1,
+        ease:"power3.out",clearProps:"opacity,transform",overwrite:"auto"});
+    });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.05});
+  cards.forEach(c=>io.observe(c));
+})();
+
+/* sticky bar frosted state */
+const bar=$("filterBar");
+new IntersectionObserver(([e])=>bar.classList.toggle("stuck",e.intersectionRatio<1),{threshold:[1]}).observe(bar);
+
+/* back to top */
+const backTop=$("backTop");
+ScrollTrigger.create({
+  trigger:".hero",start:"bottom top",
+  onEnter:()=>backTop.classList.add("show"),
+  onLeaveBack:()=>backTop.classList.remove("show"),
+});
+backTop.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+</script>
+</body>
+</html>
